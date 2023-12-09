@@ -1,6 +1,5 @@
 streamlit_option_menu
 scikit-learn
-os
 ast
 pandas
 numpy
