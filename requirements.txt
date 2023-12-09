@@ -1,7 +1,8 @@
 streamlit_option_menu
 scikit-learn
 torch
-ast
+setuptools
+ast==0.0.2
 pandas
 numpy
 skfuzzy
