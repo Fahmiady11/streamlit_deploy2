@@ -1,9 +1,10 @@
 streamlit_option_menu
-skfuzzy==0.4.2
+scikit-learn
 os
 ast
 pandas
 numpy
+skfuzzy
 time
 random
 functools
