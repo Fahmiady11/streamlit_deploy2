@@ -5,6 +5,7 @@ setuptools
 pandas
 numpy
 scikit-fuzzy
+streamlit
 random
 functools
 matplotlib
