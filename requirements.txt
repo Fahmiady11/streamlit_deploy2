@@ -6,7 +6,3 @@ pandas
 numpy
 scikit-fuzzy
 streamlit
-random
-functools
-matplotlib
-matplotlib.pyplot
