@@ -1,5 +1,7 @@
 streamlit_option_menu
 
+/home/adminuser/venv/bin/python -m pip install --upgrade pip
+
 skfuzzy
 
 os
