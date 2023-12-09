@@ -1,3 +1,4 @@
+streamlit
 streamlit_option_menu
 scikit-learn
 torch
@@ -5,5 +6,5 @@ setuptools
 pandas
 numpy
 scikit-fuzzy
-streamlit
 matplotlib
+openpyxl
