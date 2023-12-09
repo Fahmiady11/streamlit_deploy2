@@ -1,23 +1,11 @@
 streamlit_option_menu
-
-/home/adminuser/venv/bin/python -m pip install --upgrade pip
-
-skfuzzy
-
+skfuzzy==0.4.2
 os
-
 ast
-
 pandas
-
 numpy
-
 time
-
 random
-
 functools
-
 matplotlib
-
 matplotlib.pyplot
