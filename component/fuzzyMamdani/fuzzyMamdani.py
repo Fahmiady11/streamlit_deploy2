@@ -177,6 +177,7 @@ def MAPE(actual, pred):
 
 
 def EliminasiRule(dataRule, tempdatarule):
+    tempdatarule = np.concatenate(tempdatarule)
     unique_values = set(tempdatarule)
     new_list = list(unique_values)
     datarule_baru = pd.DataFrame()

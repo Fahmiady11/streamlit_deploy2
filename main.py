@@ -118,9 +118,7 @@ def mainFuzzy(status):
             hasilDefuzz = 0
 
         if (status == 'train' or status == 'train50'):
-            for i in range(len(dataRule['MIN'])):
-                if dataRule['MIN'][i] != 0:
-                    tempdatarule.append(i)
+            tempdatarule.append(np.nonzero(dataRule['MIN'].values)[0])
 
         prediksi.append(hasilDefuzz)
         dataMax.append(fuzzyMamdani.valueMax(dataRule))
@@ -135,6 +133,7 @@ def mainFuzzy(status):
 
 
 def mainGa():
+    dataRule = pd.read_excel('assets/rule_data.xlsx')
     st.subheader('Pilih Partisi 🔽')
     optPar = st.selectbox('Partisi 75:25 atau 50:50',
                           ('[75:25]', '[50:50]'), index=0)
@@ -182,6 +181,7 @@ def mainGa():
         tempvalue = 1000
 
         for gene in range(optGen):
+            tempdatarule = []
             if (gene == 0):
                 pop = algoritmaGenetika.buat_populasi(optPop)
             else:
@@ -193,6 +193,7 @@ def mainGa():
             tempEval = []
             prediksi = []
             count = 0
+            tempdatarule2 = []
             for i in range(len(konv)):
                 Kain_murah = [13, 13, konv[i][0][1]]
                 Kain_sedang = [konv[i][0][0],
@@ -232,12 +233,16 @@ def mainGa():
                     except:
                         count += 1
                         hasilDefuzz = 1
+                    tempdatarule2.append(np.nonzero(dataRule['MIN'].values)[0])
                     prediksi.append(hasilDefuzz)
+
                 eval = fuzzyMamdani.MAPE(aktual, prediksi)
                 tempEval.append(eval)
                 prediksi = []
                 fitn = algoritmaGenetika.fitnes(eval)
                 tempFitness.append(fitn)
+                tempdatarule.append([tempdatarule2])
+                tempdatarule2=[]
             elit, index = algoritmaGenetika.elitism(
                 np.array(tempEval), np.array(tempFitness), optPop)
             popTemp = []
@@ -288,6 +293,8 @@ def mainGa():
 
         df_model_terbaik = pd.DataFrame(model_terbaik)
         file_name = 'model_best.xlsx'
+
+        algoritmaGenetika.EliminasiRuleGA(dataRule, tempdatarule[index[0]][0])
 
         df_status = pd.DataFrame(status_data)
         file_name2 = 'status.xlsx'
@@ -437,6 +444,7 @@ with st.container():
                 rule = pd.read_excel('modelRule_best.xlsx')
                 st.dataframe(rule, use_container_width=True,
                              hide_index=True)
+                st.text(f'Total Dataset : {len(rule)}')
             with tab2:
                 st.subheader('Fuzzifikasi 🔽')
                 st.text('Hasil proses Fuzzifikasi')
@@ -550,7 +558,14 @@ with st.container():
                 model_best = pd.read_excel('model_best.xlsx')
                 st.dataframe(model_best, use_container_width=True,
                              hide_index=True)
-                st.text('Model Terbaik')
+
+                st.subheader('Rule Based Terpilih 🔽')
+                modelRuleGA_best = pd.read_excel('modelRuleGA_best.xlsx')
+                st.dataframe(modelRuleGA_best, use_container_width=True,
+                             hide_index=True)
+                st.text(f'Total Dataset : {len(modelRuleGA_best)}')
+
+                st.subheader('Model Terbaik 🔽')
                 st.dataframe(model_best.head(
                     1), use_container_width=True, hide_index=True)
             with pil2:
@@ -559,7 +574,8 @@ with st.container():
                 status = pd.read_excel('status.xlsx')
                 model_best = ast.literal_eval(model['individu'][0])
                 st.text(model_best)
-
+                modelRuleGA_best = pd.read_excel('modelRuleGA_best.xlsx')
+                # dataRule=modelRuleGA_best
                 prediksi = []
                 count = 0
 
