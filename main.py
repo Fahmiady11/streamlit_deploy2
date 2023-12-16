@@ -44,8 +44,6 @@ with st.sidebar:
     selected = option_menu("Batik CV NARAYA", ["Home", "Dataset", 'Rule Aturan', 'Fuzzy Mamdani', 'Fuzzy Mamdani & GA'],
                            icons=['house', 'database', 'database', 'journal-code', 'journal-code'], menu_icon="collection", default_index=0)
 
-# TODO Main Fuzzy
-
 
 def mainFuzzy(status):
     if (status == "train"):
@@ -132,8 +130,6 @@ def mainFuzzy(status):
         return fig, fig2, fuzzifikasi, dataMax, dataPredAkt, [dataEvaluasi], dataRule, tempdatarule
     else:
         return fig, fig2, fuzzifikasi, dataMax, dataPredAkt, [dataEvaluasi]
-
-# TODO Main Ga
 
 
 def mainGa():
@@ -246,7 +242,7 @@ def mainGa():
                 fitn = algoritmaGenetika.fitnes(eval)
                 tempFitness.append(fitn)
                 tempdatarule.append([tempdatarule2])
-                tempdatarule2 = []
+                tempdatarule2=[]
             elit, index = algoritmaGenetika.elitism(
                 np.array(tempEval), np.array(tempFitness), optPop)
             popTemp = []
@@ -314,7 +310,6 @@ def mainGa():
 
 
 with st.container():
-    # TODO PAGE HOME
     if (selected == 'Home'):
         col1, col2 = st.columns(2)
         with col1:
@@ -326,7 +321,7 @@ with st.container():
             st.markdown("Prodi : Teknik Informatika")
         with col2:
             st.image("assets/batik.jpg")
-    # TODO PAGE DATASET
+
     elif (selected == 'Dataset'):
         st.header('Dataset 🔽')
         st.dataframe(data, use_container_width=True, hide_index=True)
@@ -342,11 +337,10 @@ with st.container():
                          hide_index=True)
             st.header('Data Testing 50% 🔽')
             st.dataframe(dataTest50, use_container_width=True, hide_index=True)
-    # TODO PAGE RULE ATURAN
     elif (selected == 'Rule Aturan'):
         st.header('Rule Aturan Fuzzy 🔽')
         st.dataframe(dataRule, use_container_width=True, hide_index=True)
-    # TODO PAGE FUZZY MAMDANI
+
     elif (selected == 'Fuzzy Mamdani'):
         st.header('Fuzzy Mamdani')
 
@@ -396,11 +390,9 @@ with st.container():
 
         st.subheader('Pilih Partisi 🔽')
         par1, par2 = st.tabs(["Partisi 75:25", "Partisi 50:50"])
-        # TODO PAGE FUZZY MAMDANI PARTISI 1
         with par1:
             st.subheader('Pilih Proses 🔽')
             tab1, tab2 = st.tabs(["Training", "Testing"])
-            # TODO PAGE FUZZY MAMDANI PARTISI 1 TRAINING
             with tab1:
                 st.subheader('Fuzzifikasi 🔽')
                 st.text('Hasil proses Fuzzifikasi')
@@ -447,13 +439,12 @@ with st.container():
                 st.text('Hasil proses Evaluasi MAPE')
                 st.dataframe(dataEvaluasi, use_container_width=True,
                              hide_index=True)
-                st.subheader('Rule Based Terpilih 🔽')
+                st.subheader('Model Rule Based Terpilih 🔽')
                 fuzzyMamdani.EliminasiRule(dataRule1, tempdatarule1)
                 rule = pd.read_excel('modelRule_best.xlsx')
                 st.dataframe(rule, use_container_width=True,
                              hide_index=True)
                 st.text(f'Total Dataset : {len(rule)}')
-            # TODO PAGE FUZZY MAMDANI PARTISI 1 TESTING
             with tab2:
                 st.subheader('Fuzzifikasi 🔽')
                 st.text('Hasil proses Fuzzifikasi')
@@ -461,13 +452,6 @@ with st.container():
                 fuzzifikasi2.index = fuzzifikasi2.index + 1
                 fuzzifikasi2 = fuzzifikasi2.rename_axis('Dataset')
                 st.dataframe(fuzzifikasi2, use_container_width=True)
-
-                st.subheader('Rule Based Terpilih 🔽')
-                st.text('Rule Based yang digunakan')
-                rule = pd.read_excel('modelRule_best.xlsx')
-                st.dataframe(rule, use_container_width=True,
-                             hide_index=True)
-
                 st.subheader('Implikasi MIN 🔽')
                 st.text('Data terlalu banyak untuk ditampilkan')
                 st.success('Selesai', icon="✅")
@@ -492,11 +476,9 @@ with st.container():
                 st.text('Hasil proses Evaluasi MAPE')
                 st.dataframe(dataEvaluasi2, use_container_width=True,
                              hide_index=True)
-        # TODO PAGE FUZZY MAMDANI PARTISI 2
         with par2:
             st.subheader('Pilih Proses 🔽')
             tab1, tab2 = st.tabs(["Training", "Testing"])
-            # TODO PAGE FUZZY MAMDANI PARTISI 2 TRAINING
             with tab1:
                 st.subheader('Fuzzifikasi 🔽')
                 st.text('Hasil proses Fuzzifikasi')
@@ -528,12 +510,12 @@ with st.container():
                 st.text('Hasil proses Evaluasi MAPE')
                 st.dataframe(dataEvaluasi3, use_container_width=True,
                              hide_index=True)
-                st.subheader('Rule Based Terpilih 🔽')
+                st.subheader('Model Rule Based Terpilih 🔽')
                 fuzzyMamdani.EliminasiRule(dataRule3, tempdatarule3)
                 rule3 = pd.read_excel('modelRule_best.xlsx')
                 st.dataframe(rule3, use_container_width=True,
                              hide_index=True)
-            # TODO PAGE FUZZY MAMDANI PARTISI 2 TESTING
+
             with tab2:
                 st.subheader('Fuzzifikasi 🔽')
                 st.text('Hasil proses Fuzzifikasi')
@@ -541,13 +523,6 @@ with st.container():
                 fuzzifikasi4.index = fuzzifikasi4.index + 1
                 fuzzifikasi4 = fuzzifikasi4.rename_axis('Dataset')
                 st.dataframe(fuzzifikasi4, use_container_width=True)
-
-                st.subheader('Rule Based Terpilih 🔽')
-                st.text('Rule Based yang digunakan')
-                rule = pd.read_excel('modelRule_best.xlsx')
-                st.dataframe(rule, use_container_width=True,
-                             hide_index=True)
-
                 st.subheader('Implikasi MIN 🔽')
                 st.text('Data terlalu banyak untuk ditampilkan')
                 st.success('Selesai', icon="✅")
@@ -572,15 +547,12 @@ with st.container():
                 st.text('Hasil proses Evaluasi MAPE')
                 st.dataframe(dataEvaluasi4, use_container_width=True,
                              hide_index=True)
-    # TODO FUZZY MAMDANI & GA
     else:
         dataPredAkt3 = []
         st.header('Fuzzy Mamdani & Algoritma Genetika')
         tab1, tab2 = st.tabs(["Optimasi Fuzzy", "Implementasi"])
-        # TODO FUZZY MAMDANI & GA => TRAINTESTING
         with tab1:
             pil1, pil2 = st.tabs(["Data Training", "Data Testing"])
-            # TODO FUZZY MAMDANI & GA => TRAININGTESTING => TRAIN
             with pil1:
                 mainGa()
                 model_best = pd.read_excel('model_best.xlsx')
@@ -596,7 +568,6 @@ with st.container():
                 st.subheader('Model Terbaik 🔽')
                 st.dataframe(model_best.head(
                     1), use_container_width=True, hide_index=True)
-            # TODO FUZZY MAMDANI & GA => TRAININGTESTING => TESTING
             with pil2:
                 st.subheader('Solusi Terbaik 🔽')
                 model = pd.read_excel('model_best.xlsx')
@@ -606,8 +577,6 @@ with st.container():
                 modelRuleGA_best = pd.read_excel('modelRuleGA_best.xlsx')
                 # dataRule=modelRuleGA_best
                 prediksi = []
-                fuzzifikasi = []
-                dataMax = []
                 count = 0
 
                 if (status['status'][0] == "train"):
@@ -653,8 +622,6 @@ with st.container():
                 for j in range(len(jk_Input)):
                     dr_kain_murah, dr_kain_sedang, dr_kain_mahal, dr_LP_cepat, dr_LP_sedang, dr_LP_lama, dr_M_mudah, dr_M_sedang, dr_M_sulit, dr_P_murah, dr_P_sedang, dr_P_mahal = fuzzyMamdani.fuzzifikasi(
                         kain, lama, motif, pewarnaan, jk_Input[j], lp_Input[j], m_Input[j], p_Input[j])
-                    fuzzifikasi.append([dr_kain_murah, dr_kain_sedang, dr_kain_mahal, dr_LP_cepat, dr_LP_sedang,
-                                        dr_LP_lama, dr_M_mudah, dr_M_sedang, dr_M_sulit, dr_P_murah, dr_P_sedang, dr_P_mahal])
                     fuzzyMamdani.Rule(dataRule, dr_kain_murah, dr_kain_sedang, dr_kain_mahal, dr_LP_cepat, dr_LP_sedang,
                                       dr_LP_lama, dr_M_mudah, dr_M_sedang, dr_M_sulit, dr_P_murah, dr_P_sedang, dr_P_mahal)
                     try:
@@ -664,8 +631,6 @@ with st.container():
                         count += 1
                         hasilDefuzz = 1
                     prediksi.append(hasilDefuzz)
-                    dataMax.append(fuzzyMamdani.valueMax(dataRule))
-
                 eval = fuzzyMamdani.MAPE(aktual, prediksi)
 
                 for i in range(len(prediksi)):
@@ -676,32 +641,6 @@ with st.container():
                 dataPredAkt3 = pd.DataFrame(
                     dataPredAkt3, columns=['Aktual', 'Prediksi'])
                 dataEvaluasi = pd.DataFrame([dataEvaluasi], columns=['MAPE'])
-
-                st.subheader('Fuzzifikasi 🔽')
-                st.text('Hasil proses Fuzzifikasi')
-                fuzzifikasi = pd.DataFrame(fuzzifikasi, columns=['Harga Kain Murah', 'Harga Kain Sedang', 'Harga Kain Mahal', 'Lama Pembuatan Cepat', 'Lama Pembuatan Sedang',
-                                                                 'Lama Pembuatan Lama', 'Motif Mudah', 'Motif Sedang', 'Motif Sulit', 'Pewarnaan  Murah', 'Pewarnaan  Sedang', 'Pewarnaan  Mahal'])
-                fuzzifikasi.reset_index(drop=True, inplace=True)
-                fuzzifikasi.index = fuzzifikasi.index + 1
-                fuzzifikasi = fuzzifikasi.rename_axis('Dataset')
-                st.dataframe(fuzzifikasi, use_container_width=True)
-
-                st.subheader('Rule Based Terpilih 🔽')
-                st.text('Rule Based yang digunakan')
-                st.dataframe(modelRuleGA_best, use_container_width=True,
-                             hide_index=True)
-
-                st.subheader('Implikasi MIN 🔽')
-                st.text('Data terlalu banyak untuk ditampilkan')
-                st.success('Selesai', icon="✅")
-                st.subheader('Agregasi MAX 🔽')
-                st.text('Hasil proses Agregasi MAX')
-                dataMax = pd.DataFrame(
-                    dataMax, columns=['Murah', 'Sedang', 'Mahal'])
-                dataMax.reset_index(drop=True, inplace=True)
-                dataMax.index = dataMax.index + 1
-                dataMax = dataMax.rename_axis('Dataset')
-                st.dataframe(dataMax, use_container_width=True)
 
                 st.subheader('Defuzzifikasi 🔽')
                 st.text('Hasil proses Defuzzifikasi Centroid')
@@ -716,11 +655,9 @@ with st.container():
                 st.text('Hasil proses Evaluasi MAPE')
                 st.dataframe(
                     dataEvaluasi, use_container_width=True, hide_index=True)
-        # TODO FUZZY MAMDANI & GA => IMPLEMENTASI
         with tab2:
             model = pd.read_excel('model_best.xlsx')
             model_best = ast.literal_eval(model['individu'][0])
-            modelRuleGA_best = pd.read_excel('modelRuleGA_best.xlsx')
             st.subheader('Implementasi 🔽')
             st.text('Masukkan Data pada column yang disediakan')
             jk_InputT = st.selectbox('Masukkan Input Harga Kain', (22, 34, 44))
@@ -730,8 +667,7 @@ with st.container():
                 "Masukkan Input Motif (10-500) :", min_value=10, max_value=500, value=10, step=1)
             p_InputT = st.selectbox(
                 'Masukkan Input Pewarnaan', (3, 6, 9, 12, 16, 20))
-            fuzzifikasi = []
-            dataMax = []
+            st.subheader('Hasil 🔽')
             if (jk_InputT != None and lp_InputT != None and m_InputT != None and p_InputT != None):
                 Kain_murah = [13, 13, model_best[0][1]]
                 Kain_sedang = [
@@ -762,8 +698,6 @@ with st.container():
                                                                                        Motif_Mudah, Motif_Sedang, Motif_Sulit], [Pewarnaan_Murah, Pewarnaan_Sedang, Pewarnaan_Mahal], [Batik_Murah, Batik_Sedang, Batik_Mahal])
                 dr_kain_murah, dr_kain_sedang, dr_kain_mahal, dr_LP_cepat, dr_LP_sedang, dr_LP_lama, dr_M_mudah, dr_M_sedang, dr_M_sulit, dr_P_murah, dr_P_sedang, dr_P_mahal = fuzzyMamdani.fuzzifikasi(
                     kain, lama, motif, pewarnaan, jk_InputT, lp_InputT, m_InputT, p_InputT)
-                fuzzifikasi.append([dr_kain_murah, dr_kain_sedang, dr_kain_mahal, dr_LP_cepat, dr_LP_sedang,
-                                    dr_LP_lama, dr_M_mudah, dr_M_sedang, dr_M_sulit, dr_P_murah, dr_P_sedang, dr_P_mahal])
                 fuzzyMamdani.Rule(dataRule, dr_kain_murah, dr_kain_sedang, dr_kain_mahal, dr_LP_cepat, dr_LP_sedang,
                                   dr_LP_lama, dr_M_mudah, dr_M_sedang, dr_M_sulit, dr_P_murah, dr_P_sedang, dr_P_mahal)
                 try:
@@ -771,49 +705,9 @@ with st.container():
                         dataRule, hargaBatik)
                 except:
                     hasilDefuzz = 1
-                unique_values = set(np.nonzero(dataRule['MIN'].values)[0])
-                new_list = list(unique_values)
-
-                dataMax.append(fuzzyMamdani.valueMax(dataRule))
-                st.subheader('Fuzzifikasi 🔽')
-                st.text('Hasil proses Fuzzifikasi')
-                fuzzifikasi = pd.DataFrame(fuzzifikasi, columns=['Harga Kain Murah', 'Harga Kain Sedang', 'Harga Kain Mahal', 'Lama Pembuatan Cepat', 'Lama Pembuatan Sedang',
-                                                                 'Lama Pembuatan Lama', 'Motif Mudah', 'Motif Sedang', 'Motif Sulit', 'Pewarnaan  Murah', 'Pewarnaan  Sedang', 'Pewarnaan  Mahal'])
-                fuzzifikasi.reset_index(drop=True, inplace=True)
-                fuzzifikasi.index = fuzzifikasi.index + 1
-                fuzzifikasi = fuzzifikasi.rename_axis('Dataset')
-                st.dataframe(fuzzifikasi, use_container_width=True)
-                st.subheader('Rule Based Terpilih 🔽')
-                st.text('Rule Based yang digunakan')
-                st.dataframe(modelRuleGA_best, use_container_width=True,
-                             hide_index=True)
-                st.subheader('Implikasi MIN 🔽')
-                st.text('Hasil proses Implikasi MIN')
-                df_baru = pd.DataFrame()
-                kolom_terpilih = ['Harga Kain', 'Lama Pembuatan',
-                                  'Motif', 'Pewarnaan', 'Harga Batik', 'MIN']
-                for i in range(len(dataRule)):
-                    if (i in new_list):
-                        df_baru = pd.concat(
-                            [df_baru, dataRule.loc[[i], kolom_terpilih]], ignore_index=True)
-                df_baru.reset_index(drop=True, inplace=True)
-                df_baru.index = df_baru.index + 1
-                df_baru = df_baru.rename_axis('Dataset')
-                st.dataframe(df_baru, use_container_width=True)
-
-                st.subheader('Agregasi MAX 🔽')
-                st.text('Hasil proses Agregasi MAX')
-                dataMax = pd.DataFrame(
-                    dataMax, columns=['Murah', 'Sedang', 'Mahal'])
-                dataMax.reset_index(drop=True, inplace=True)
-                dataMax.index = dataMax.index + 1
-                dataMax = dataMax.rename_axis('Dataset')
-                st.dataframe(dataMax, use_container_width=True)
-                st.subheader('Hasil 🔽')
                 st.write("<p>Harga Jual kain : <span style='color:green'>{}</span></p>".format(
-                    "Rp {:,}".format(hasilDefuzz * 1000)), unsafe_allow_html=True)
+                    hasilDefuzz), unsafe_allow_html=True)
             else:
-                st.subheader('Hasil 🔽')
                 st.write(
                     "<p>Harga Jual kain : <span style='color:green'>0</span></p>", unsafe_allow_html=True)
 
