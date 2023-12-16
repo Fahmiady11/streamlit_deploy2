@@ -135,8 +135,8 @@ def elitism(population, fitness, elite_size):
     return elite[::-1].flatten(), sort_index[::-1].flatten()
 
 
-def EliminasiRuleGA(dataRule, tempdatarule):
-    tempdatarule = np.concatenate(tempdatarule)
+def EliminasiRuleGA(dataRule, tempdatarule, index):
+    tempdatarule = np.concatenate(tempdatarule[index[0]][0])
     unique_values = set(tempdatarule)
     new_list = list(unique_values)
     datarule_baru = pd.DataFrame()
