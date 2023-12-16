@@ -298,7 +298,7 @@ def mainGa():
         df_model_terbaik = pd.DataFrame(model_terbaik)
         file_name = 'model_best.xlsx'
 
-        algoritmaGenetika.EliminasiRuleGA(dataRule, tempdatarule[index[0]][0])
+        algoritmaGenetika.EliminasiRuleGA(dataRule, tempdatarule, index)
 
         df_status = pd.DataFrame(status_data)
         file_name2 = 'status.xlsx'
